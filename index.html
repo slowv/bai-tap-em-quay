@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>To do</title>
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/lib/bootstrap.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div class="container mt-3">
+    <div class="card p-3 px-5">
+        <div class="card-body ">
+            <div class="row mb-5">
+<!--                Title-->
+                <div class="col-md-12 text-center">
+                    <div class="title">
+                        <i class="fa fa-check-square" aria-hidden="true"></i>
+                        <u>
+                            My Todo-s
+                        </u>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row text-center box-status mb-5">
+                <div class="col-md-4">
+                    <button class="btn status-active">All</button>
+                </div>
+                <div class="col-md-4">
+                    <button class="btn">Active</button>
+                </div>
+                <div class="col-md-4">
+                    <button class="btn">Complete</button>
+                </div>
+            </div>
+
+            <!--                Input thêm công việc-->
+            <div class="row mb-5">
+                <div class="col-md-10">
+                    <input type="text" id="input-add-task" class="form-control" placeholder="Thêm công việc..." aria-label="Thêm công việc..." aria-describedby="btn-add">
+                </div>
+                <div class="col-md-2 text-center">
+                    <button class="btn btn-primary" type="button" id="btn-add-task">Thêm mới</button>
+                </div>
+            </div>
+
+<!--            Danh sách công việc-->
+            <div class="row">
+                <div class="col-md-12">
+                    <div id="tasks">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                            <label class="form-check-label" for="flexCheckDefault">
+                                Default checkbox
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="js/lib/bootstrap.min.js"></script>
+<script src="js/index.js"></script>
+</body>
+</html>

@@ -1,0 +1,26 @@
+.title {
+    color: #007BFF;
+    font-weight: 400;
+    font-size: 45px;
+}
+
+button.status-active {
+    border-bottom: 3px solid #0084F5;
+    border-radius: 0;
+    color: #0084F5 !important;
+}
+
+button.status-active:hover {
+    border-bottom: 3px solid #0084F5;
+    color: #0084F5;
+}
+
+.box-status button {
+    min-width: 100px;
+    font-weight: bold;
+    color: #3d3d3d;
+}
+
+.line-through {
+    text-decoration: line-through;
+}
