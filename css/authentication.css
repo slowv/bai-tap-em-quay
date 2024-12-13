@@ -1,0 +1,27 @@
+.box-authentication {
+    background: #dedede;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    /*background: url('../img/982045.jpg') no-repeat center center fixed;*/
+}
+
+.login {
+    margin-top: 100px;
+    width: 40%;
+    padding: 20px;
+    background: #fff;
+    border-radius: 5px;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+
+.msg {
+    font-style: italic;
+    font-weight: bold;
+}

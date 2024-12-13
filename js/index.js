@@ -1,16 +1,18 @@
-const $ = selector => document.querySelector(selector);
-const $$ = selector => document.querySelectorAll(selector);
+import {$, $$, setData, getData} from '/js/util.js';
+
 const keyData = 'tasks';
 
 // Lấy dữ liệu từ localStorage theo key là tasks nếu không có thì default sẽ là array rỗng [].
-const tasks = getData(keyData) || [];
+let tasks = getData(keyData) || [];
+
+// Tab status default
+let tabStatus = 'All';
 
 // Hiển thị danh sách task
-generateTask(tasks);
+generateUI(tasks);
 
 // 1. Thêm task
 const btnAddTask = $('#btn-add-task');
-
 btnAddTask.addEventListener('click', e => {
     // lấy thẻ input
     const inputAddTask = $('#input-add-task');
@@ -27,7 +29,7 @@ btnAddTask.addEventListener('click', e => {
         setData(keyData, tasks);
 
         // Hiển thị lại UI danh sách task
-        generateTask(tasks);
+        generateUI(tasks);
 
         // Reset input
         inputAddTask.value = '';
@@ -44,22 +46,39 @@ function createTask(taskName) {
     }
 }
 
-// Done Thêm task
-
 // Hiển thị danh sách công việc, biến tasks là array
-function generateTask(tasks) {
+function generateUI(tasks) {
     // Lấy thẻ chứa danh sách task
     const elmTasks = $('#tasks');
 
     let content = '';
 
+    // Tìm box input thêm task
+    const boxAddTask = $('.box-add-task');
+    boxAddTask.classList.remove('d-none');
+
+    // Tìm box delete all
+    const boxDeleteAll = $('.box-delete-all');
+    boxDeleteAll.classList.add('d-none');
+
+    if (tabStatus === 'Active') {
+        tasks = tasks.filter((task) => !task.status);
+    } else if (tabStatus === 'Complete') {
+        tasks = tasks.filter((task) => task.status);
+        boxAddTask.classList.add('d-none');
+        boxDeleteAll.classList.remove('d-none');
+    }
+
     tasks.forEach(task => {
         content += `
-            <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="" id="${task.id}" ${task.status ? 'checked' : ''}>
-                <label class="form-check-label ${task.status ? 'line-through' : ''}" for="${task.id}">
-                    ${task.name}
-                </label>
+            <div class="task">
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" onclick="updateData(${task.id}, ${!task.status})" value="" id="${task.id}" ${task.status ? 'checked' : ''}>
+                    <label class="form-check-label ${task.status ? 'line-through' : ''}" for="${task.id}">
+                        ${task.name}
+                    </label>
+                </div>
+                <i title="Xóa" class="fa fa-trash text-danger ${tabStatus === 'Complete' ? '' : 'd-none'}" aria-hidden="true" onclick="deleteTasks([${task.id}])"></i>
             </div>
         `
     });
@@ -67,15 +86,45 @@ function generateTask(tasks) {
     elmTasks.innerHTML = content;
 }
 
-// Lấy dữ liệu từ localStorage theo key
-function getData(key) {
-    return JSON.parse(localStorage.getItem(key));
+// Cập nhật task
+function updateData(id, status) {
+    tasks = tasks.map(task => task.id === id ? {...task, status} : task)
+    setData(keyData, tasks);
+    generateUI(tasks);
 }
 
-// Set dữ liệu vào localStorage theo key và value
-function setData(key, value) {
-    localStorage.setItem(key, JSON.stringify(value));
+// Xóa Task
+function deleteTasks(ids) {
+    // Lọc ra những task có id không có trong danh sách ids
+    tasks = tasks.filter((task) => !ids.includes(task.id));
+    setData(keyData, tasks);
+    generateUI(tasks);
 }
+
+function deleteAll() {
+    // Lấy danh sách id của task có status = true
+    const ids = tasks.filter(tasks => tasks.status)
+        .map(task => task.id);
+    deleteTasks(ids);
+}
+
+// Add event client cho tab status
+const tabStatusElm = $$('.status');
+tabStatusElm.forEach((elm) => {
+    elm.addEventListener('click', e => {
+        tabStatus = elm.getAttribute('data');
+
+        // Tìm tab status thay đổi giao diện
+        // Xóa class status-active hiện tại
+        $('.status-active').classList.remove('status-active');
+
+        // Thêm class status-active vào tab status vừa click
+        elm.classList.add('status-active')
+
+        generateUI(tasks);
+    })
+})
+
 
 
 

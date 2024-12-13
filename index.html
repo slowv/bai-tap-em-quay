@@ -9,10 +9,12 @@
     <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <link rel="stylesheet" href="css/lib/bootstrap.min.css">
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/authentication.css">
 </head>
 <body>
-<div class="container mt-3">
-    <div class="card p-3 px-5">
+
+<div class="container mt-5">
+    <div class="card p-3 px-5 shadow">
         <div class="card-body ">
             <div class="row mb-5">
 <!--                Title-->
@@ -28,18 +30,18 @@
 
             <div class="row text-center box-status mb-5">
                 <div class="col-md-4">
-                    <button class="btn status-active">All</button>
+                    <button class="btn status status-active" data="All">All</button>
                 </div>
                 <div class="col-md-4">
-                    <button class="btn">Active</button>
+                    <button class="btn status" data="Active">Active</button>
                 </div>
                 <div class="col-md-4">
-                    <button class="btn">Complete</button>
+                    <button class="btn status" data="Complete">Complete</button>
                 </div>
             </div>
 
-            <!--                Input thêm công việc-->
-            <div class="row mb-5">
+            <!--  Input thêm công việc-->
+            <div class="row mb-5 box-add-task">
                 <div class="col-md-10">
                     <input type="text" id="input-add-task" class="form-control" placeholder="Thêm công việc..." aria-label="Thêm công việc..." aria-describedby="btn-add">
                 </div>
@@ -50,14 +52,29 @@
 
 <!--            Danh sách công việc-->
             <div class="row">
-                <div class="col-md-12">
+                <div class="col-md-10">
                     <div id="tasks">
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                            <label class="form-check-label" for="flexCheckDefault">
-                                Default checkbox
-                            </label>
+                        <div class="task">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="" id="flex1">
+                                <label class="form-check-label" for="flex1">
+                                    Default checkbox
+                                </label>
+                            </div>
+                            <i class="fa fa-trash text-danger" aria-hidden="true"></i>
                         </div>
+                        <div class="task">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="" id="flex2">
+                                <label class="form-check-label" for="flex2">
+                                    Default checkbox
+                                </label>
+                            </div>
+                            <i class="fa fa-trash text-danger" aria-hidden="true"></i>
+                        </div>
+                    </div>
+                    <div class="text-end d-none box-delete-all">
+                        <button type="button" class="btn btn-danger btn-sm" onclick="deleteAll()">Xóa tất cả</button>
                     </div>
                 </div>
             </div>
@@ -65,6 +82,6 @@
     </div>
 </div>
 <script src="js/lib/bootstrap.min.js"></script>
-<script src="js/index.js"></script>
+<script type="module" src="js/index.js"></script>
 </body>
 </html>
