@@ -6,7 +6,7 @@ let userLoggedIn = getCurrentLogin();
 if (!userLoggedIn) {
     navigate('/todo-asm/pages/authentication.html');
 }
-$('.user-logged').innerText = `Xin chào ${userLoggedIn.firstname} ${userLoggedIn.lastname}`;
+addContent('.user-logged', `Xin chào ${userLoggedIn.firstname} ${userLoggedIn.lastname}`);
 
 const posts = getData('posts') || [];
 

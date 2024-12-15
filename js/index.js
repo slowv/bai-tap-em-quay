@@ -1,12 +1,12 @@
-import {$, $$, setData, getData, addEvent, UUID} from '/js/util.js';
+import {$, $$, setData, getData, addEvent, UUID, addContent, navigate} from '/js/util.js';
 import {getCurrentLogin} from "./security-utils.js";
 
 // Hiển thị thông tin user đang login
 let userLoggedIn = getCurrentLogin();
 if (!userLoggedIn) {
-    window.location.assign('/todo-asm/pages/authentication.html');
+    navigate('/todo-asm/pages/authentication.html');
 }
-$('.user-logged').innerText = `Xin chào ${userLoggedIn.firstname} ${userLoggedIn.lastname}`;
+addContent('.user-logged', `Xin chào ${userLoggedIn.firstname} ${userLoggedIn.lastname}`);
 
 const keyData = 'tasks';
 
@@ -20,8 +20,7 @@ let tabStatus = 'All';
 generateUI(tasks);
 
 // 1. Thêm task
-const btnAddTask = $('#btn-add-task');
-btnAddTask.addEventListener('click', e => {
+addEvent('#btn-add-task', 'click', e => {
     // lấy thẻ input
     const inputAddTask = $('#input-add-task');
 
@@ -103,7 +102,7 @@ function updateData(id) {
     tasks = tasks.map(task => {
         const status = !task.status;
         console.log(task.id === id)
-        return  task.id === id ? {...task, status} : task
+        return task.id === id ? {...task, status} : task
     })
     console.table(tasks);
     setData(keyData, tasks);
@@ -126,21 +125,19 @@ function deleteAll() {
 }
 
 // Add event client cho tab status
-const tabStatusElm = $$('.status');
-tabStatusElm.forEach((elm) => {
-    elm.addEventListener('click', e => {
-        tabStatus = elm.getAttribute('data');
+addEvent('.status', 'click', e => {
+    tabStatus = e.target.getAttribute('data');
 
-        // Tìm tab status thay đổi giao diện
-        // Xóa class status-active hiện tại
-        $('.status-active').classList.remove('status-active');
+    // Tìm tab status thay đổi giao diện
+    // Xóa class status-active hiện tại
+    $('.status-active').classList.remove('status-active');
 
-        // Thêm class status-active vào tab status vừa click
-        elm.classList.add('status-active')
+    // Thêm class status-active vào tab status vừa click
+    e.target.classList.add('status-active')
 
-        generateUI(tasks);
-    })
+    generateUI(tasks);
 })
+
 
 
 

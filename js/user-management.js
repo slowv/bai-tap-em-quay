@@ -1,12 +1,12 @@
-import {$, $$, setData, getData, addEvent, navigate, normalize} from '/js/util.js';
+import {$, $$, setData, getData, addEvent, navigate, normalize, addContent} from '/js/util.js';
 import {getCurrentLogin} from "./security-utils.js";
 
 // Hiển thị thông tin user đang login
 let userLoggedIn = getCurrentLogin();
 if (!userLoggedIn) {
-    window.location.assign('/todo-asm/pages/authentication.html');
+    navigate('/todo-asm/pages/authentication.html');
 }
-$('.user-logged').innerText = `Xin chào ${userLoggedIn.firstname} ${userLoggedIn.lastname}`;
+addContent('.user-logged', `Xin chào ${userLoggedIn.firstname} ${userLoggedIn.lastname}`);
 
 const users = getData('users') || [];
 
