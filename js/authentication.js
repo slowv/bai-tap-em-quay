@@ -1,4 +1,4 @@
-import {$, $$, setData, getData} from '/js/util.js';
+import {$, $$, setData, getData, navigate} from '/js/util.js';
 
 const keyUserData = 'users';
 let users = getData(keyUserData) || [];
@@ -34,7 +34,6 @@ $('#btn-register').addEventListener('click', (e) => {
     alert('Đăng ký tài khoản thành công!');
 });
 
-
 function createUser(firstname, lastname, email, password) {
     return {
         id: new Date().getTime(),
@@ -68,6 +67,7 @@ $('#btn-login').addEventListener('click', (e) => {
 
     alert('Login Success!!')
     setData('userLoggedIn', userLoggedIn);
+    navigate('/todo-asm/pages/user-management.html')
 })
 
 function validateMatchUser(email, password, selectorMsg) {

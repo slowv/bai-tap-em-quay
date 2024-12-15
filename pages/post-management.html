@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Post management</title>
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/lib/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/post.css">
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">My todo-s</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link " data-link='/todo-asm/pages/user-management.html' href="#">User</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-link='/todo-asm/pages/todo-management.html'>Todo</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page"
+                       data-link='/todo-asm/pages/post-management.html'>Post</a>
+                </li>
+            </ul>
+            <div class="container-fluid text-end">
+                <h5 class="user-logged"></h5>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<div class="container mt-5">
+    <div class="card">
+        <div class="card-header d-flex justify-content-between align-content-center">
+            <h5>Quản lý bài viết</h5>
+            <form class="d-flex w-auto">
+                <input class="form-control me-2" id="input-search-post" style="min-width: 300px" type="search"
+                       placeholder="Tìm kiếm..." aria-label="Tìm kiếm...">
+            </form>
+        </div>
+        <div class="card-body">
+            <table class="table table-post">
+                <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Tiêu đề</th>
+                    <th scope="col">Nội dung</th>
+                    <th scope="col">Hình ảnh</th>
+                    <th scope="col">Người tạo</th>
+                    <th scope="col">Ngày tạo</th>
+                    <th scope="col">Ngày cập nhật</th>
+                    <th scope="col" class="text-center">Action</th>
+                </tr>
+                </thead>
+                <tbody id="posts">
+                <tr>
+                    <th scope="row" class="ellipsis" style="max-width: 80px">13213213213213</th>
+                    <td class="ellipsis">Mark</td>
+                    <td class="ellipsis">
+                        Otto
+                        quocviet.hn98@gmail.comquocviet.hn98@gmail.comquocviet.hn98@gmail.comquocviet.hn98@gmail.comquocviet.hn98@gmail.comquocviet.hn98@gmail.com
+                    </td>
+                    <td>
+                        <img class="img-thumbnail mw-100"
+                             src="https://miro.medium.com/v2/resize:fit:1400/1*ZDszFKdY4MFLJN9z7uA7LA.png" alt="">
+                    </td>
+                    <td>quocviet.hn98@gmail.com</td>
+                    <td>quocviet.hn98@gmail.com</td>
+                    <td>quocviet.hn98@gmail.com</td>
+                    <td><i class="fa fa-eye"></i></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- Scrollable modal -->
+
+<!-- Modal -->
+<div class="modal fade" id="postDetailModal" tabindex="-1" aria-labelledby="postDetailModal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="title">Modal title</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="card">
+                    <img src="" class="card-img-top post-image" alt="...">
+                    <div class="card-body">
+                        <p class="card-text content">Some quick example text to build on the card title and make up the
+                            bulk of the card's content.</p>
+                        <div>
+                            Người tạo: <span class="createdBy"></span>
+                        </div>
+                        <div>
+                            Ngày đăng: <span class="createdDate"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="../js/lib/bootstrap.min.js"></script>
+<script type="module" src="../js/router.js"></script>
+<script type="module" src="../js/post-management.js"></script>
+</body>
+</html>

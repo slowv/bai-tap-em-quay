@@ -1,0 +1,27 @@
+.table-post th,
+.table-post td {
+    max-width: 150px;
+}
+
+.table-post tr {
+    vertical-align: middle;
+}
+
+.ellipsis {
+    white-space: nowrap;        /* Không cho phép xuống dòng */
+    overflow: hidden;           /* Ẩn phần text vượt quá kích thước */
+    text-overflow: ellipsis;    /* Hiển thị dấu ... khi text bị cắt */
+    width: 200px;
+}
+
+.mw-100 {
+    max-width: 100px !important;
+}
+
+.mw-150 {
+    max-width: 150px !important;
+}
+
+.mw-200 {
+    max-width: 200px !important;
+}

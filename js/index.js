@@ -1,4 +1,12 @@
-import {$, $$, setData, getData} from '/js/util.js';
+import {$, $$, setData, getData, addEvent, UUID} from '/js/util.js';
+import {getCurrentLogin} from "./security-utils.js";
+
+// Hiển thị thông tin user đang login
+let userLoggedIn = getCurrentLogin();
+if (!userLoggedIn) {
+    window.location.assign('/todo-asm/pages/authentication.html');
+}
+$('.user-logged').innerText = `Xin chào ${userLoggedIn.firstname} ${userLoggedIn.lastname}`;
 
 const keyData = 'tasks';
 
@@ -40,7 +48,7 @@ btnAddTask.addEventListener('click', e => {
 // Tạo object task
 function createTask(taskName) {
     return {
-        id: new Date().getTime(),
+        id: UUID(),
         name: taskName,
         status: false
     }
@@ -73,7 +81,7 @@ function generateUI(tasks) {
         content += `
             <div class="task">
                 <div class="form-check">
-                    <input class="form-check-input" type="checkbox" onclick="updateData(${task.id}, ${!task.status})" value="" id="${task.id}" ${task.status ? 'checked' : ''}>
+                    <input class="form-check-input task-checkbox" type="checkbox" data-check="${task.status}" value="" id="${task.id}" ${task.status ? 'checked' : ''}>
                     <label class="form-check-label ${task.status ? 'line-through' : ''}" for="${task.id}">
                         ${task.name}
                     </label>
@@ -84,11 +92,20 @@ function generateUI(tasks) {
     });
 
     elmTasks.innerHTML = content;
+
+    addEvent('.task-checkbox', 'click', e => {
+        updateData(e.target.getAttribute('id'));
+    })
 }
 
 // Cập nhật task
-function updateData(id, status) {
-    tasks = tasks.map(task => task.id === id ? {...task, status} : task)
+function updateData(id) {
+    tasks = tasks.map(task => {
+        const status = !task.status;
+        console.log(task.id === id)
+        return  task.id === id ? {...task, status} : task
+    })
+    console.table(tasks);
     setData(keyData, tasks);
     generateUI(tasks);
 }
