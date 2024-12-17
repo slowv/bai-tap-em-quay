@@ -2,8 +2,9 @@ import {activeRouteLink} from "./router.js";
 import {logout} from "./security-utils.js";
 import {addComponent, navbar} from "./layout.js";
 import {PAGE} from "./constant.js";
+import {lazyLoadScript} from "./util.js";
 
-export const Application = {
+export const ApplicationConfig = {
     eventStartApp: [activeRouteLink, logout],
     pages: [
         {
@@ -16,41 +17,15 @@ export const Application = {
     ]
 }
 
-initialization(Application);
+StartApplication(ApplicationConfig);
 
-function initialization(application) {
-    const page = application.pages.find(page => page.path === window.location.pathname)
+function StartApplication(applicationConfig) {
+    const page = applicationConfig.pages.find(page => page.path === window.location.pathname)
     if (page) {
         // Load script
-        lazyLoadScript(page.script, _ => {
-        });
+        lazyLoadScript(page.script, _ => {});
 
         // Add component
-        page.component.forEach((component) => addComponent('body', component, page.event || Application.eventStartApp));
+        page.component.forEach((component) => addComponent('body', component, page.event || ApplicationConfig.eventStartApp));
     }
-}
-
-function lazyLoadScript(url, callback) {
-    // Kiểm tra nếu script đã được tải
-    if (document.querySelector(`script[src="${url}"]`)) {
-        console.log("Script already loaded:", url);
-        if (callback) callback();
-        return;
-    }
-
-    // Tạo thẻ script
-    const script = document.createElement("script");
-    script.src = url;
-    script.type = "module";
-    script.async = true; // Đảm bảo tải không đồng bộ
-    script.onload = () => {
-        console.log("Script loaded:", url);
-        if (callback) callback();
-    };
-    script.onerror = () => {
-        console.error("Failed to load script:", url);
-    };
-
-    // Thêm vào body hoặc head
-    document.body.appendChild(script);
 }

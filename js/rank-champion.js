@@ -3,8 +3,7 @@ import {addClass, addContent, addEvent, navigate, removeClass, UUID} from "./uti
 import {getCurrentLogin} from "./security-utils.js";
 import {addComponent, navbar} from "./layout.js";
 import {PAGE} from "./constant.js";
-
-import {Application} from "./app-initialization.js";
+import {ApplicationConfig} from "./app-initialization.js";
 
 const IMAGES = [
     {id: UUID(), src: '../img/champion/tft13_missmage.png', name: 'Mel'},
@@ -23,7 +22,7 @@ initPage();
 
 function initPage() {
     // Thêm navbar vào dom
-    addComponent('body', navbar(PAGE.DTCL), Application.eventStartApp);
+    addComponent('body', navbar(PAGE.DTCL), ApplicationConfig.eventStartApp);
 
     let userLoggedIn = getCurrentLogin();
     if (!userLoggedIn) {

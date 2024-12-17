@@ -69,3 +69,28 @@ export function removeClass(elm, clazz) {
     elm.classList.remove(clazz);
 }
 
+export function lazyLoadScript(url, callback) {
+    // Kiểm tra nếu script đã được tải
+    if (document.querySelector(`script[src="${url}"]`)) {
+        console.log("Script already loaded:", url);
+        if (callback) callback();
+        return;
+    }
+
+    // Tạo thẻ script
+    const script = document.createElement("script");
+    script.src = url;
+    script.type = "module";
+    script.async = true; // Đảm bảo tải không đồng bộ
+    script.onload = () => {
+        console.log("Script loaded:", url);
+        if (callback) callback();
+    };
+    script.onerror = () => {
+        console.error("Failed to load script:", url);
+    };
+
+    // Thêm vào body hoặc head
+    document.body.appendChild(script);
+}
+
