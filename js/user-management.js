@@ -1,14 +1,9 @@
 import {$, addContent, addEvent, getData, navigate, normalize} from '/js/util.js';
 import {getCurrentLogin} from "./security-utils.js";
-import {addComponent, navbar} from "./layout.js";
-import {PAGE} from "./constant.js";
-import {Application} from "./app-initialization.js";
 
 init();
 
 function init() {
-    addComponent('body', navbar(PAGE.USER), Application.eventStartApp)
-
     // Hiển thị thông tin user đang login
     let userLoggedIn = getCurrentLogin();
     if (!userLoggedIn) {
