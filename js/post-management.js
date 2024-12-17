@@ -1,12 +1,21 @@
 import {$, addContent, addEvent, getData, navigate, normalize} from './util.js'
 import {getCurrentLogin} from "./security-utils.js";
+import {addComponent, navbar} from "./layout.js";
+import {PAGE} from "./constant.js";
+import {Application} from "./app-initialization.js";
 
-// Hiển thị thông tin user đang login
-let userLoggedIn = getCurrentLogin();
-if (!userLoggedIn) {
-    navigate('/todo-asm/pages/authentication.html');
+init();
+
+function init() {
+    addComponent('body', navbar(PAGE.POST), Application.eventStartApp)
+
+    // Hiển thị thông tin user đang login
+    let userLoggedIn = getCurrentLogin();
+    if (!userLoggedIn) {
+        navigate('/todo-asm/pages/authentication.html');
+    }
+    addContent('.user-logged', `Xin chào ${userLoggedIn.firstname} ${userLoggedIn.lastname}`);
 }
-addContent('.user-logged', `Xin chào ${userLoggedIn.firstname} ${userLoggedIn.lastname}`);
 
 const posts = getData('posts') || [];
 
@@ -20,7 +29,6 @@ addEvent('#input-search-post', 'keyup', e => {
 function showPostDetail(e) {
     console.table(posts)
     const post = posts.find(post => post.id === e.target.getAttribute('id'));
-    console.log(post, e.target.getAttribute('id'))
     if (post) {
         addContent('#postDetailModal #title', post.title);
         addContent('#postDetailModal .content', post.content);

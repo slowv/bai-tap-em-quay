@@ -1,0 +1,301 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Xếp hạng rank ĐTCL</title>
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/lib/bootstrap.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css?family=Montserrat&subset=vietnamese');
+
+        * {
+            font-family: 'Montserrat', sans-serif;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            width: 100%;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .dropzone.dragover {
+            border-color: blue;
+        }
+
+        main {
+            background: #2B1E4C;
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            padding: 20px;
+        }
+
+        .box-tier {
+            width: 70%;
+            height: fit-content;
+            border: 1px solid #a6a6a6;
+            border-radius: 5px;
+            padding: 30px;
+        }
+
+        .box-tier .tier-rank {
+            display: flex;
+        }
+
+        .box-tier .tier-rank .title {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #000;
+            font-weight: bold;
+        }
+
+        .box-tier .tier-rank:nth-child(1) .title {
+            background: #FF7F7E;
+        }
+
+        .box-tier .tier-rank:nth-child(2) .title {
+            background: #FFBF7F;
+        }
+
+        .box-tier .tier-rank:nth-child(3) .title {
+            background: #FFDF80;
+        }
+
+        .box-tier .tier-rank:nth-child(4) .title {
+            background: #FDFE7F;
+        }
+
+        .box-tier .tier-rank:nth-child(5) .title {
+            background: #BDFE7F;
+        }
+
+        .box-tier .tier-rank .dropzone {
+            flex: 9;
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            padding: 10px;
+            gap: 15px;
+            position: relative;
+            width: 100%;
+            min-height: 100px;
+            border: 2px dashed #aaa;
+            flex-wrap: wrap; /* Cho phép các phần tử xuống dòng */
+        }
+
+        .cham {
+            width: 55px;
+            height: 55px;
+            object-fit: cover;
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            position: relative;
+        }
+
+        .tiers .cham {
+            width: 60px;
+            height: 60px;
+        }
+
+        .tiers {
+            position: relative;
+            display: flex;
+            width: 100%;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .cham .name {
+            color: #fff;
+            font-size: 13px;
+            text-align: center;
+            font-weight: bold;
+            margin-bottom: -15px;
+        }
+
+        .info {
+            position: absolute;
+            top: calc(-250px + 30px);
+            right: -300px;
+            width: 300px;
+            height: 500px;
+            background: #27282B;
+            border-radius: 5px;
+            overflow: hidden;
+            color: #ababab;
+            z-index: 1000;
+        }
+
+        .info.d-none {
+            height: 0;
+        }
+
+        .info .header {
+            position: relative;
+            background-size: cover !important; /* Lấp đầy div */
+            background-repeat: no-repeat !important; /* Không lặp lại hình ảnh */
+            background-position: center !important; /* Căn giữa hình ảnh */
+            width: 100%;
+            height: 30%;
+            color: #fff;
+            display: flex;
+            justify-content: space-between;
+            flex-direction: column;
+            padding: 8px;
+        }
+
+        .info .header .name {
+            font-size: 20px;
+            text-align: left;
+            margin-bottom: 0;
+        }
+
+        .info .header .title {
+            font-size: 13px;
+        }
+
+        .info .header .des {
+            display: flex;
+            justify-content: space-between;
+            font-weight: bold;
+            font-size: 14px;
+            align-items: center;
+        }
+
+        .info .header .des img {
+            width: 25px;
+        }
+
+        .info .header .des .cost img {
+            width: 15px;
+        }
+
+        .info .bottom .mana img {
+            width: 15px;
+        }
+
+        .info .bottom .mana {
+            font-weight: bold;
+            font-size: 13px;
+        }
+
+        .info .bottom .detail img {
+            width: 15px;
+        }
+
+        .info .bottom {
+            padding: 8px;
+        }
+
+        .info .bottom .r {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .info .bottom .detail {
+            display: block;
+            margin-top: 10px;
+            font-size: 12px;
+        }
+
+        .info .bottom .passive {
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        .info .bottom .passive img {
+            width: 40px;
+        }
+
+    </style>
+</head>
+<body>
+
+
+<main>
+    <div class="box-tier">
+        <div class="tier-rank">
+            <div class="title">S</div>
+            <div class="dropzone"></div>
+        </div>
+        <div class="tier-rank">
+            <div class="title">A</div>
+            <div class="dropzone"></div>
+        </div>
+        <div class="tier-rank">
+            <div class="title">B</div>
+            <div class="dropzone"></div>
+        </div>
+        <div class="tier-rank">
+            <div class="title">C</div>
+            <div class="dropzone"></div>
+        </div>
+        <div class="tier-rank">
+            <div class="title">D</div>
+            <div class="dropzone"></div>
+        </div>
+
+        <div class="text-white my-3">Danh sách tướng:</div>
+
+        <div class="tiers">
+            <div class="draggable cham" draggable="true" id="1"
+                 style="background: url('../img/champion/tft13_missmage.png') no-repeat center; background-position: center; width: 60px; height: 60px;"
+            >
+                <div class="name">Mel</div>
+                <div class="info d-none">
+                    <div class="header" style="background: url('../img/champion/tft13_viktor.png') no-repeat">
+                        <div>
+                            <div class="name">Viktor</div>
+                            <div class="title">Sứ giả máy móc</div>
+                        </div>
+                        <div class="des">
+                            <div>
+                                <img src="../img/machineherald.png" alt=""> Sứ giả máy móc
+                            </div>
+                            <div class="cost">
+                                <img src="../img/gold2.png" alt="icon"> 6
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bottom">
+                        <div class="r mt-1">
+                            <div class="passive">
+                                <img src="../img/viktor_passive.png" alt="Bão điện từ">
+                                Bão điện từ
+                            </div>
+                            <div class="mana">
+                                <img src="../img/Mana.svg" alt="icon"> 0/100
+                            </div>
+                        </div>
+                        <div class="r detail">
+                            Nội Tại: Đòn đánh thường được thay thế bằng Tia Chết Chóc, gây 70/175/2000 (AP) sát thương
+                            phép và <span class="text-info">35/90/1000</span> <img src="../img/AP.svg" alt="icon"> sát thương chuẩn theo đường thẳng 2 ô. Các kẻ địch trúng đòn nhận 30%
+                            Phân Tách và Cào Xé trong 5 giây.
+                            <div class="mt-2"></div>
+                            Kích Hoạt: Triệu hồi một cơn bão điện từ bao trùm cả chiến trường, hất tung TẤT CẢ kẻ địch
+                            lên không trung trong 2/3/30 giây. Khi hết thời gian hiệu lực, quật chúng xuống mặt đất, gây
+                            <span class="text-info">120/300/9999</span> (<img src="../img/AP.svg" alt="icon">) + <span class="text-info">8/20/100%</span> Máu tối đa dưới dạng sát thương phép.
+                            <div class="mt-2"></div>
+                            Phân Tách: Giảm Giáp, Cào Xé: Giảm Kháng Phép
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+<script src="../js/lib/bootstrap.min.js"></script>
+<script type="module" src="../js/router.js"></script>
+<script type="module" src="../js/rank-champion.js"></script>
+</body>
+</html>

@@ -5,10 +5,9 @@ export const getCurrentLogin = () => {
 }
 
 export const logout = () => {
-    setData('userLoggedIn', null);
-    navigate('/todo-asm/pages/authentication.html');
+    addEvent('.logout', 'click', _ => {
+        setData('userLoggedIn', null);
+        navigate('/todo-asm/pages/authentication.html');
+    })
 }
 
-addEvent('.logout', 'click', _ => {
-    logout();
-})

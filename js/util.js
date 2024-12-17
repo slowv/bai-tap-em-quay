@@ -52,3 +52,20 @@ export function addContent(selector, content) {
 export function UUID() {
     return crypto.randomUUID();
 }
+
+export function toggleClass(elm, clazz) {
+    if (elm.classList.contains(clazz)) {
+        elm.classList.remove(clazz);
+    } else {
+        elm.classList.add(clazz);
+    }
+}
+
+export function addClass(elm, clazz) {
+    elm.classList.add(clazz);
+}
+
+export function removeClass(elm, clazz) {
+    elm.classList.remove(clazz);
+}
+

@@ -1,12 +1,21 @@
-import {$, $$, setData, getData, addEvent, UUID, addContent, navigate} from '/js/util.js';
+import {$, addContent, addEvent, getData, navigate, setData, UUID} from '/js/util.js';
 import {getCurrentLogin} from "./security-utils.js";
+import {addComponent, navbar} from "./layout.js";
+import {PAGE} from "./constant.js";
+import {Application} from "./app-initialization.js";
 
-// Hiển thị thông tin user đang login
-let userLoggedIn = getCurrentLogin();
-if (!userLoggedIn) {
-    navigate('/todo-asm/pages/authentication.html');
+init();
+
+function init() {
+    addComponent('body', navbar(PAGE.TODO), Application.eventStartApp)
+
+    // Hiển thị thông tin user đang login
+    let userLoggedIn = getCurrentLogin();
+    if (!userLoggedIn) {
+        navigate('/todo-asm/pages/authentication.html');
+    }
+    addContent('.user-logged', `Xin chào ${userLoggedIn.firstname} ${userLoggedIn.lastname}`);
 }
-addContent('.user-logged', `Xin chào ${userLoggedIn.firstname} ${userLoggedIn.lastname}`);
 
 const keyData = 'tasks';
 
